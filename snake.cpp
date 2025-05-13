@@ -6,6 +6,8 @@
 #include <time.h>
 #include <Windows.h>
 using namespace std;
+enum state {stop,down , up , rightt , leftt};
+state now;
 struct p{
    int x,y;
 };
@@ -18,6 +20,7 @@ void setap(){
    gamer.y = arz/2;
    food.x = rand()%tool;
    food.y = rand()%arz;
+   now = stop;
 }
 void draw(){
    system("cls");
@@ -59,9 +62,51 @@ void draw(){
 
 }
 void input(){
+   if (kbhit())
+   {
+      switch(getche()){
+         case 'w':
+         case 'W':
+            now = up;
+            break;
+         case 's':
+         case 'S':
+            now = down;
+            break;
+         case 'a':
+         case 'A':
+            now = leftt;
+            break;
+         case 'd':
+         case 'D':
+            now = rightt;
+            break;
+         default:
+            break;
+      }
+   }
+   
 
 }
 void logic(){
+   switch (now)
+   {
+   case leftt:
+      gamer.y--; 
+      break;
+   case rightt:
+      gamer.y++;
+      break;
+   case up:
+      gamer.x--;
+      break;
+   case down:
+      gamer.x++;
+      break;
+   
+   default:
+      break;
+   }
 
 }
 int main(){
@@ -72,7 +117,7 @@ int main(){
       draw();
       input();
       logic();
-      Sleep(2000);
+      Sleep(500);
    }
    
    getch();
