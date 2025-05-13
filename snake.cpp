@@ -33,6 +33,14 @@ void draw(){
          {
             cout << "#";
          }
+         else if(j == gamer.y && i == gamer.x){
+            cout << "@";
+         }
+         else if (j == food.y && i == food.x)
+         {
+            cout << "$";
+         }
+         
          else
          {
             cout << " ";
