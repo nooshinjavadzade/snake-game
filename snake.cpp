@@ -15,7 +15,12 @@ p gamer , food;
 int score = 0;
 bool gameover=false;
 int tool = 30 , arz = 30;
-
+void colorfull_print(int color, char in){
+   HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+   SetConsoleTextAttribute(hConsole, color);
+   cout << in;
+   SetConsoleTextAttribute(hConsole, 7);
+}
 void setap(){
    gamer.x = tool/2;
    gamer.y = arz/2;
@@ -38,11 +43,11 @@ void draw(){
             cout << "#";
          }
          else if(j == gamer.y && i == gamer.x){
-            cout << "@";
+            colorfull_print(5 , '@');
          }
          else if (j == food.y && i == food.x)
          {
-            cout << "$";
+            colorfull_print(10 , '$');
          }
          
          else
