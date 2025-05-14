@@ -15,11 +15,12 @@ p gamer , food;
 int score = 0;
 bool gameover=false;
 int tool = 30 , arz = 30;
+
 void setap(){
    gamer.x = tool/2;
    gamer.y = arz/2;
-   food.x = rand()%tool;
-   food.y = rand()%arz;
+   food.x = rand()%(tool-2)+1;
+   food.y = rand()%(arz-2)+1;
    now = stop;
 }
 void draw(){
@@ -59,7 +60,7 @@ void draw(){
       cout << "#";
    }
    cout << endl;
-
+   cout <<"your score:" << score << endl;
 }
 void input(){
    if (kbhit())
@@ -93,20 +94,44 @@ void logic(){
    {
    case leftt:
       gamer.y--; 
+      if (gamer.y<1 || gamer.y>28)
+      {
+         gameover = true;
+      }
+      
       break;
    case rightt:
       gamer.y++;
+      if (gamer.y<1 || gamer.y>28)
+      {
+         gameover = true;
+      }
       break;
    case up:
       gamer.x--;
+      if (gamer.x<1 || gamer.x>28)
+      {
+         gameover = true;
+      }
       break;
    case down:
       gamer.x++;
+      if (gamer.x<1 || gamer.x>28)
+      {
+         gameover = true;
+      }
       break;
    
    default:
       break;
    }
+
+   if (gamer.x == food.x && gamer.y == food.y){
+      score++;
+      food.x = rand()%(tool-2)+1;
+      food.y = rand()%(arz-2)+1;
+   }
+   
 
 }
 int main(){
@@ -117,9 +142,9 @@ int main(){
       draw();
       input();
       logic();
-      Sleep(500);
+      Sleep(200);
    }
-   
+   cout << "game over!!!!";
    getch();
    return 0;
 }
